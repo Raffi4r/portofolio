@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Majestic Admin</title>
+    <title>Raffi4r</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('admin') }}/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/vendors/base/vendor.bundle.base.css">
@@ -16,22 +16,26 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('admin') }}/css/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{ asset('admin') }}/images/favicon.png" />
+    <link rel="shortcut icon" href="{{ asset('admin') }}/images/favicon.ico" />
     <!-- place this script inside your head tag -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.11/sweetalert2.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.11/sweetalert2.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+
 </head>
 
 <body>
+    <script></script>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand brand-logo" href="index.html"><img src="{{ asset('admin') }}/images/logo.svg"
-                            alt="logo" /></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img
-                            src="{{ asset('admin') }}/images/logo-mini.svg" alt="logo" /></a>
+                    <a class="navbar-brand brand-logo" href="{{ route('pages.index') }}"><img
+                            src="{{ asset('admin') }}/images/logo.png" alt="logo" /></a>
+                    <a class="navbar-brand brand-logo-mini"{{ route('pages.index') }}"><img
+                            src="{{ asset('admin') }}/images/logo_square.png" alt="logo" /></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-toggle="minimize">
                         <span class="mdi mdi-sort-variant"></span>
@@ -68,19 +72,19 @@
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('pages.index') }}">
-                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <i class="mdi mdi-file-document menu-icon"></i>
                             <span class="menu-title">Pages</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('experiences.index') }}">
-                            <i class="mdi mdi-briefcase-outline menu-icon"></i>
+                            <i class="mdi mdi-briefcase menu-icon"></i>
                             <span class="menu-title">Experiences</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('experiences.index') }}">
-                            <i class="mdi mdi-account-school-outline menu-icon"></i>
+                            <i class="mdi mdi-school menu-icon"></i>
                             <span class="menu-title">Educations</span>
                         </a>
                     </li>
@@ -89,7 +93,6 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    @include('dashboard.messages')
                     <div class="row">
                         <div class="col-md-12 stretch-card">
                             <div class="card">
@@ -141,32 +144,7 @@
 
     <script src="{{ asset('admin') }}/js/jquery.cookie.js" type="text/javascript"></script>
     <!-- place this script before closing body tag -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('.summernote').summernote({
-                tabsize: 2,
-                height: 150
-            });
-        });
-    </script>
-
-    <script>
-        function toggleDateEnd() {
-            var dateEndInput = document.getElementById("date_end");
-            var disableDateEndCheckbox = document.getElementById("disable_date_end");
-
-            if (disableDateEndCheckbox.checked) {
-                dateEndInput.disabled = true;
-                dateEndInput.value = "";
-            } else {
-                dateEndInput.disabled = false;
-                dateEndInput.value = "";
-            }
-        }
-    </script>
 </body>
 
 </html>

@@ -15,7 +15,7 @@ class pageController extends Controller
      */
     public function index()
     {
-        $data = Page::orderBy('title', 'asc')->get();
+        $data = Page::orderBy('title', 'asc')->paginate(10);
         return view('dashboard.pages.index')->with('data', $data);
     }
 
