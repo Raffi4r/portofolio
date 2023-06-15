@@ -26,6 +26,13 @@
 </head>
 
 <body>
+
+    @php
+        if (session()->has('message')) {
+            $message = session()->get('message');
+        }
+    @endphp
+
     <script></script>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
@@ -108,9 +115,9 @@
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
                         <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a
-                                href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+                                href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com</a> 2021</span>
                         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a
-                                href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard </a>
+                                href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard</a>
                             templates</span>
                     </div>
                 </footer>
@@ -145,6 +152,39 @@
     <script src="{{ asset('admin') }}/js/jquery.cookie.js" type="text/javascript"></script>
     <!-- place this script before closing body tag -->
 
+    <script>
+        var message;
+        @if (isset($message))
+            message = @json($message);
+        @endif
+        if (message === 'delete') {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Data deleted successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (message === 'save') {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Data saved successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else if (message === 'update') {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Data updated successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    </script>
+
 </body>
+
 
 </html>

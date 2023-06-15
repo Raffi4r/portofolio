@@ -33,11 +33,11 @@
                                 <a href="{{ route('pages.edit', $item->id) }}" class="btn btn-warning btn-md">
                                     Edit
                                 </a>
-                                <form action="{{ route('pages.destroy', $item->id) }}" class="d-inline" method="POST"
-                                    id="deleteForm">
+                                <form action="{{ route('pages.destroy', $item->id) }}" class="d-inline" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-fw" onclick="confirmDelete(event)">
+                                    <button type="submit" class="btn btn-danger btn-fw"
+                                        onclick="confirmDelete(event, this.closest('form'))">
                                         Delete
                                     </button>
                                 </form>
@@ -56,7 +56,7 @@
     </div>
 
     <script>
-        function confirmDelete(event) {
+        function confirmDelete(event, form) {
             event.preventDefault();
 
             Swal.fire({
@@ -70,7 +70,7 @@
                 cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('deleteForm').submit();
+                    form.submit();
                 }
             });
         }

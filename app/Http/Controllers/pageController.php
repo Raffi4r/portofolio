@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class pageController extends Controller
 {
@@ -37,9 +36,6 @@ class pageController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('title', $request->title);
-        Session::flash('description', $request->description);
-
         $request->validate(
             [
                 'title'         => 'required',
@@ -57,7 +53,7 @@ class pageController extends Controller
         ];
         Page::create($data);
 
-        return redirect()->route('pages.index')->with('success', 'Page saved successfully');
+        return redirect()->route('pages.index')->with('message', 'save');
     }
 
     /**
@@ -92,9 +88,6 @@ class pageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Session::flash('title', $request->title);
-        Session::flash('description', $request->description);
-
         $request->validate(
             [
                 'title'         => 'required',
@@ -112,7 +105,7 @@ class pageController extends Controller
         ];
         Page::where('id', $id)->update($data);
 
-        return redirect()->route('pages.index')->with('success', 'Page updated successfully');
+        return redirect()->route('pages.index')->with('message', 'update');
     }
 
     /**
@@ -124,6 +117,6 @@ class pageController extends Controller
     public function destroy($id)
     {
         Page::where('id', $id)->delete();
-        return redirect()->route('pages.index')->with('success', 'Page deleted successfully');
+        return redirect()->route('pages.index')->with('message', 'delete');
     }
 }
