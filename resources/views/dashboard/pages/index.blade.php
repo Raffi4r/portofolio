@@ -8,14 +8,14 @@
         </button>
     </a>
 
-    <div class="table-responsive my-3">
+    <div class="table-responsive">
         @if ($data->isNotEmpty())
-            <table class="table table-stripped">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th class="col-1">No</th>
+                        <th>No</th>
                         <th>Title</th>
-                        <th class="col-3">Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,11 +33,11 @@
                                 <a href="{{ route('pages.edit', $item->id) }}" class="btn btn-warning btn-md">
                                     Edit
                                 </a>
-                                <form action="{{ route('pages.destroy', $item->id) }}" class="d-inline" method="POST">
+                                <form action="{{ route('pages.destroy', $item->id) }}" class="d-inline delete-form"
+                                    method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-fw"
-                                        onclick="confirmDelete(event, this.closest('form'))">
+                                    <button type="submit" class="btn btn-danger btn-fw delete-btn">
                                         Delete
                                     </button>
                                 </form>
@@ -46,33 +46,35 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="my-5">
-                {{ $data->links() }}
-            </div>
         @else
             <p class="mt-3">No data</p>
         @endif
-
+    </div>
+    <div>
+        {{ $data->links() }}
     </div>
 
     <script>
-        function confirmDelete(event, form) {
-            event.preventDefault();
+        $(document).ready(function() {
+            $('.table-responsive').on('click', '.delete-btn', function(event) {
+                event.preventDefault();
+                var form = $(this).closest('.delete-form');
 
-            Swal.fire({
-                title: 'You are sure?',
-                text: 'Data will be deleted',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Data will be deleted',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel'
+                }).then(function(result) {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
-        }
+        });
     </script>
 @endsection

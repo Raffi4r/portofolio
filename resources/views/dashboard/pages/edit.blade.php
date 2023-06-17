@@ -34,82 +34,84 @@
     </form>
 
     <script>
-        var myEditor;
-        var form = document.getElementById('pageForm');
-        var titleInput = document.getElementById('title');
+        $(document).ready(function() {
+            var myEditor;
+            var form = $('#pageForm');
+            var titleInput = $('#title');
+            var titleError = $('#titleError');
+            var descriptionError = $('#descriptionError');
 
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .then(editor => {
-                myEditor = editor;
-                myEditor.model.document.on('change:data', () => {
-                    var content = editor.getData();
-                    if (content != '') {
-                        hideError('descriptionError');
-                    }
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .then(editor => {
+                    myEditor = editor;
+                    myEditor.model.document.on('change:data', () => {
+                        var content = editor.getData();
+                        if (content !== '') {
+                            hideError(descriptionError);
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error(err.stack);
                 });
-            })
-            .catch(err => {
-                console.error(err.stack);
+
+            form.on('submit', function(event) {
+                event.preventDefault();
+
+                if (validateForm()) {
+                    Swal.fire({
+                        title: 'You are sure?',
+                        text: 'Data will be saved',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                        }
+                    });
+                }
             });
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
+            titleInput.on('input', function() {
+                hideError(titleError);
+                titleInput.removeClass('is-invalid');
+            });
 
-            if (validateForm()) {
-                Swal.fire({
-                    title: 'You are sure?',
-                    text: 'Data will be saved',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.submit();
-                    }
-                });
+            function validateForm() {
+                var title = titleInput.val().trim();
+
+                var isValid = true;
+
+                if (title === '') {
+                    showError('Title cannot be empty', titleError);
+                    titleInput.addClass('is-invalid');
+                    isValid = false;
+                }
+
+                if (myEditor.getData() === '') {
+                    showError('Description cannot be empty', descriptionError);
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    hideError(titleError);
+                }
+
+                return isValid;
+            }
+
+            function showError(errorMessage, errorElement) {
+                errorElement.text(errorMessage);
+            }
+
+            function hideError(errorElement) {
+                errorElement.text('');
             }
         });
-
-        titleInput.addEventListener('input', function() {
-            hideError('titleError');
-            titleInput.classList.remove('is-invalid');
-        });
-
-        function validateForm() {
-            var title = titleInput.value.trim();
-
-            var isValid = true;
-
-            if (title === '') {
-                showError('Title cannot be empty', 'titleError');
-                titleInput.classList.add('is-invalid');
-                isValid = false;
-            }
-
-            if (myEditor.getData() === '') {
-                showError('Description cannot be empty', 'descriptionError');
-                isValid = false;
-            }
-
-            if (isValid) {
-                hideError('titleError');
-            }
-
-            return isValid;
-        }
-
-        function showError(errorMessage, errorId) {
-            var errorDiv = document.getElementById(errorId);
-            errorDiv.textContent = errorMessage;
-        }
-
-        function hideError(errorId) {
-            var errorDiv = document.getElementById(errorId);
-            errorDiv.textContent = '';
-        }
     </script>
 @endsection

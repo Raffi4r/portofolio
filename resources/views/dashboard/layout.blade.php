@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.11/sweetalert2.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.11/sweetalert2.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
 </head>
 
@@ -128,7 +129,6 @@
         <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-
     <!-- plugins:js -->
     <script src="{{ asset('admin') }}/vendors/base/vendor.bundle.base.js"></script>
     <!-- endinject -->
@@ -153,35 +153,34 @@
     <!-- place this script before closing body tag -->
 
     <script>
-        var message;
-        @if (isset($message))
-            message = @json($message);
-        @endif
-        if (message === 'delete') {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Data deleted successfully',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        } else if (message === 'save') {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Data saved successfully',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        } else if (message === 'update') {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Data updated successfully',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
+        $(function() {
+
+            @php
+                $message = isset($message) ? $message : null;
+            @endphp
+
+            var message = @json($message);
+
+            if (message) {
+                var title = '';
+
+                if (message === 'delete') {
+                    title = 'Data deleted successfully';
+                } else if (message === 'save') {
+                    title = 'Data saved successfully';
+                } else if (message === 'update') {
+                    title = 'Data updated successfully';
+                }
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: title,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
     </script>
 
 </body>
