@@ -20,9 +20,6 @@
     <!-- place this script inside your head tag -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.11/sweetalert2.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.11/sweetalert2.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
 </head>
 
@@ -151,6 +148,11 @@
 
     <script src="{{ asset('admin') }}/js/jquery.cookie.js" type="text/javascript"></script>
     <!-- place this script before closing body tag -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.11/sweetalert2.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    @yield('script')
 
     <script>
         $(function() {
@@ -182,8 +184,6 @@
             }
         });
     </script>
-
 </body>
-
 
 </html>
