@@ -8,7 +8,7 @@
         </button>
     </a>
 
-    <div class="table-responsive">
+    <div class="table-responsive my-3">
         @if ($data->isNotEmpty())
             <table class="table table-striped">
                 <thead>
@@ -53,9 +53,11 @@
     <div>
         {{ $data->links() }}
     </div>
+@endsection
 
+@section('script')
     <script>
-        $(document).ready(function() {
+        $(function() {
             $('.table-responsive').on('click', '.delete-btn', function(event) {
                 event.preventDefault();
                 var form = $(this).closest('.delete-form');

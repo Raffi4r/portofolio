@@ -31,7 +31,9 @@
             Save
         </button>
     </form>
+@endsection
 
+@section('script')
     <script>
         $(function() {
             var editor = null;

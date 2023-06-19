@@ -32,7 +32,9 @@
             Update
         </button>
     </form>
+@endsection
 
+@section('script')
     <script>
         $(document).ready(function() {
             var myEditor;
