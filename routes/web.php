@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\experinceController;
+use App\Http\Controllers\experienceController;
 use App\Http\Controllers\pageController;
 
 /*
@@ -31,6 +31,6 @@ Route::prefix('dashboard')->middleware('auth')->group(
     function () {
         Route::get('/', [pageController::class, 'index']);
         Route::resource('pages', pageController::class);
-        Route::resource('experiences', experinceController::class);
+        Route::resource('experiences', experienceController::class);
     }
 );
