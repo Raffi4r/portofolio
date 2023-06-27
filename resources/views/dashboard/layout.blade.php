@@ -88,7 +88,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('experiences.index') }}">
+                        <a class="nav-link" href="{{ route('educations.index') }}">
                             <i class="mdi mdi-school menu-icon"></i>
                             <span class="menu-title">Educations</span>
                         </a>
