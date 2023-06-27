@@ -15,7 +15,7 @@ class experienceController extends Controller
      */
     public function index()
     {
-        $data = History::orderBy('date_start', 'asc')->paginate(10);
+        $data = History::where('type', 'experience')->orderBy('date_start', 'asc')->paginate(10);
         foreach ($data as $item) {
             $start = Carbon::parse($item->date_start);
             $item->start_date = $start->format('d F Y');
@@ -59,8 +59,8 @@ class experienceController extends Controller
                 [
                     'title.required'        => 'Title cannot be empty',
                     'info1.required'        => 'Company cannot be empty',
-                    'date_start.required'   => 'Date start cannot be empty',
-                    'date_end.required'     => 'Date start cannot be empty',
+                    'date_start.required'   => 'Start date cannot be empty',
+                    'date_end.required'     => 'End date cannot be empty',
                     'description.required'  => 'Description cannot be empty',
 
                 ]
@@ -76,7 +76,7 @@ class experienceController extends Controller
                 [
                     'title.required'        => 'Title cannot be empty',
                     'info1.required'        => 'Company cannot be empty',
-                    'date_start.required'   => 'Date start cannot be empty',
+                    'date_start.required'   => 'Start date cannot be empty',
                     'description.required'  => 'Description cannot be empty',
 
                 ]
@@ -92,7 +92,6 @@ class experienceController extends Controller
             'description'   => $request->description
         ];
         History::create($data);
-
         return redirect()->route('experiences.index')->with('message', 'save');
     }
 
@@ -140,8 +139,8 @@ class experienceController extends Controller
                 [
                     'title.required'        => 'Title cannot be empty',
                     'info1.required'        => 'Company cannot be empty',
-                    'date_start.required'   => 'Date start cannot be empty',
-                    'date_end.required'     => 'Date start cannot be empty',
+                    'date_start.required'   => 'Start date cannot be empty',
+                    'date_end.required'     => 'End date cannot be empty',
                     'description.required'  => 'Description cannot be empty',
 
                 ]
@@ -157,7 +156,7 @@ class experienceController extends Controller
                 [
                     'title.required'        => 'Title cannot be empty',
                     'info1.required'        => 'Company cannot be empty',
-                    'date_start.required'   => 'Date start cannot be empty',
+                    'date_start.required'   => 'Start date cannot be empty',
                     'description.required'  => 'Description cannot be empty',
 
                 ]
@@ -173,7 +172,6 @@ class experienceController extends Controller
             'description'   => $request->description
         ];
         History::where('id', $id)->update($data);
-
         return redirect()->route('experiences.index')->with('message', 'update');
     }
 

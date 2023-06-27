@@ -198,7 +198,7 @@
                 if (validateForm()) {
                     Swal.fire({
                         title: 'Are you sure?',
-                        text: 'Data will be saved',
+                        text: 'Data will be updated',
                         icon: 'question',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
