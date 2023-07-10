@@ -1,3 +1,7 @@
 # Laravel Portofolio Project
 
-Selamat datang di Project Laravel Portofolio.
+Using :
+- Laravel 9
+- JQuery
+- Bootstrap
+- MajesticAdmin https://github.com/BootstrapDash/MajesticAdmin-Free-Bootstrap-Admin-Template
