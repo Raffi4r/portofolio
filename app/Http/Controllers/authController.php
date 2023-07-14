@@ -43,7 +43,7 @@ class authController extends Controller
             );
 
             Auth::login($user);
-            return redirect()->to('dashboard');
+            return redirect()->route('pages.index');
         } else {
             return redirect()->to('auth')->with('error', 'Account not registered');
         }
