@@ -120,6 +120,12 @@
                             <span class="menu-title">Skills</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile.index') }}">
+                            <i class="mdi mdi-account menu-icon"></i>
+                            <span class="menu-title">Profile</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- partial -->
@@ -181,7 +187,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
-    
+
     @stack('child-scripts')
 
     @yield('script')
