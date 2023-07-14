@@ -6,20 +6,20 @@
     <form action="{{ route('skills.update') }}" method="POST" id="pageForm">
         @csrf
         <div class="mb-3">
-            <label for="title" class="form-label">Programming Languages & Tools<span style="color:red">*</span> :</label>
-            <input type="text" class="form-control form-control-md @error('title') is-invalid @enderror skill"
-                name="languages" id="title" aria-describedby="helpId" data-validation="required"
-                value="{{ get_meta_value('languages') }}">
-            <div id="titleError" class="error"></div>
-            @error('title')
+            <label for="languages" class="form-label">Programming Languages & Tools<span style="color:red">*</span> :</label>
+            <input type="text" class="form-control form-control-md @error('languages') is-invalid @enderror skill"
+                name="languages" id="languages" aria-describedby="helpId" data-validation="required"
+                value="{{ get_meta_value('languages') }}" autocomplete="off">
+            <div id="languagesError" class="error"></div>
+            @error('languages')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Workflow<span style="color:red">*</span> :</label>
+            <label for="workflow" class="form-label">Workflow<span style="color:red">*</span> :</label>
             <textarea class="ckeditor" rows="5" name="workflow" id="editor" data-validation="required">{{ get_meta_value('workflow') }}</textarea>
-            <div id="descriptionError" class="error"></div>
-            @error('description')
+            <div id="workflowError" class="error"></div>
+            @error('workflow')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
@@ -33,7 +33,7 @@
     <script>
         $(function() {
             var editor = null;
-            var titleInput = $('#title');
+            var languagesInput = $('#languages');
             var pageForm = $('#pageForm');
 
             ClassicEditor.create($('#editor')[0])
@@ -42,7 +42,7 @@
                     editor.model.document.on('change:data', function() {
                         var content = editor.getData();
                         if (content) {
-                            hideError('descriptionError');
+                            hideError('workflowError');
                         }
                     });
                 })
@@ -71,27 +71,27 @@
                 }
             });
 
-            titleInput.on('input', function() {
-                hideError('titleError');
-                titleInput.removeClass('is-invalid');
+            languagesInput.on('input', function() {
+                hideError('languagesError');
+                languagesInput.removeClass('is-invalid');
             });
 
             function validateForm() {
                 var isValid = true;
 
-                if (titleInput.val().trim() === '') {
-                    showError('Title cannot be empty', 'titleError');
-                    titleInput.addClass('is-invalid');
+                if (languagesInput.val().trim() === '') {
+                    showError('Languages cannot be empty', 'languagesError');
+                    languagesnput.addClass('is-invalid');
                     isValid = false;
                 }
 
                 if (!editor.getData()) {
-                    showError('Description cannot be empty', 'descriptionError');
+                    showError('Workflow cannot be empty', 'workflowError');
                     isValid = false;
                 }
 
                 if (isValid) {
-                    hideError('titleError');
+                    hideError('languagesError');
                 }
 
                 return isValid;
