@@ -6,6 +6,7 @@ use App\Http\Controllers\educationController;
 use App\Http\Controllers\experienceController;
 use App\Http\Controllers\pageController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\settingController;
 use App\Http\Controllers\skillController;
 
 /*
@@ -40,5 +41,7 @@ Route::prefix('dashboard')->middleware('auth')->group(
         Route::post('skills', [skillController::class, 'update'])->name('skills.update');
         Route::get('profile', [profileController::class, 'index'])->name('profile.index');
         Route::post('profile', [profileController::class, 'update'])->name('profile.update');
+        Route::get('setting', [settingController::class, 'index'])->name('setting.index');
+        Route::post('setting', [settingController::class, 'update'])->name('setting.update');
     }
 );
